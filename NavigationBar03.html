@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Radial Menu with Live Logos</title>
+  <style>
+    :root {
+      --nav-bg:      #111;
+      --menu-bg:     #fff;
+      --icon-off:    #999;
+      --icon-on:     #39ff14;
+      --radius:      80px;
+      --home-size:   40px;
+      --item-size:   36px;
+    }
+    * { box-sizing:border-box; margin:0; padding:0 }
+    body {
+      height:100vh;
+      display:flex; align-items:center; justify-content:center;
+      background:#f2f2f2; font-family:sans-serif;
+    }
+    .dot-nav { position: relative; width:200px; height:200px; }
+    #menu-toggle { display:none; }
+
+    /* center Home */
+    .home-icon {
+      position:absolute; top:50%; left:50%;
+      width:var(--home-size); height:var(--home-size);
+      background:var(--nav-bg); color:var(--icon-off);
+      border-radius:50%;
+      transform:translate(-50%,-50%);
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; transition:color .3s, filter .3s;
+      z-index:2;
+    }
+    #menu-toggle:checked + .home-icon {
+      color: var(--icon-on);
+      filter: drop-shadow(0 0 8px var(--icon-on));
+    }
+
+    /* flying social items */
+    .menu a {
+      position:absolute; top:50%; left:50%;
+      width:var(--item-size); height:var(--item-size);
+      background:var(--menu-bg); border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      transform: translate(-50%,-50%) rotate(var(--angle)) translate(var(--radius))
+                 rotate(calc(-1*var(--angle))) scale(0);
+      opacity:0; transition:transform .3s, opacity .3s;
+      z-index:1;
+    }
+    .menu a img {
+      width:20px; height:20px;
+      filter: grayscale(100%) brightness(70%);
+      transition:filter .3s;
+    }
+    .menu a:hover img {
+      filter: none;
+    }
+    #menu-toggle:checked ~ .menu a {
+      transform: translate(-50%,-50%) rotate(var(--angle)) translate(var(--radius))
+                 rotate(calc(-1*var(--angle))) scale(1);
+      opacity:1;
+    }
+
+    /* assign each its angle */
+    .menu a:nth-child(1) { --angle:   0deg; }
+    .menu a:nth-child(2) { --angle:  45deg; }
+    .menu a:nth-child(3) { --angle:  90deg; }
+    .menu a:nth-child(4) { --angle: 135deg; }
+    .menu a:nth-child(5) { --angle: 180deg; }
+    .menu a:nth-child(6) { --angle: 225deg; }
+    .menu a:nth-child(7) { --angle: 270deg; }
+    .menu a:nth-child(8) { --angle: 315deg; }
+  </style>
+</head>
+<body>
+  <div class="dot-nav">
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="home-icon" aria-label="Home">
+      <!-- inline Home SVG -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="20" height="20" fill="currentColor">
+        <path d="M280.37 148.26L96 300.11V464a16 16 0 0016 16l112-.29a16 16 0 0016-15.72V368a16 16 0 0116-16h64a16 16 0 0116 16v96a16 16 0 0016 16l112 .29a16 16 0 0016-16V300L295.67 148.26a12.19 12.19 0 00-15.3 0z"/>
+        <path d="M571.6 251.47L488 182.6V44a12 12 0 00-12-12h-52a12 12 0 00-12 12v72.61L318.47 43a48 48 0 00-61 0L4.34 251.47a12 12 0 001.6 16.9l25.5 31a12 12 0 0016.9 1.6L64 271.69V464a48 48 0 0048 48h368a48 48 0 0048-48V271.7l18.9 15.24a12 12 0 0016.9-1.6l25.5-31a12 12 0 00-1.7-16.87z"/>
+      </svg>
+    </label>
+
+    <div class="menu">
+      <a href="#" aria-label="Facebook">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook">
+      </a>
+      <a href="https://x.com/mhbappi05" aria-label="Twitter">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter">
+      </a>
+      <a href="https://www.instagram.com/helloworld05___/" aria-label="Instagram">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram">
+      </a>
+      <a href="https://www.linkedin.com/in/md-mahmudul-hasan-bappi-65435b245/" aria-label="LinkedIn">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn">
+      </a>
+      <a href="https://github.com/mhbappi05" aria-label="GitHub">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub">
+      </a>
+      <a href="https://www.youtube.com/@HelloWorld-s2g" aria-label="YouTube">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube">
+      </a>
+      <a href="https://www.pinterest.com/hasanbappi21102000/" aria-label="Pinterest">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/pinterest.svg" alt="Pinterest">
+      </a>
+      <a href="https://www.tiktok.com/@hello_world2950" aria-label="TikTok">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tiktok.svg" alt="TikTok">
+      </a>
+    </div>
+  </div>
+</body>
+</html>
